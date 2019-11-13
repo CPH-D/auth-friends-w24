@@ -24,7 +24,7 @@ const Form = ({submitFriend}) => {
                     onChange={handleChange}/>
             <button type="submit">Add Friend</button>
         </form>
-    )
-}
+    );
+};
 
 export default Form;

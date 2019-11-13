@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 // import axios from 'axios';
 import axiosWithAuth from '../utilities/Authorization';
 import Form from './Form';
+import Card from './Card';
 
 const Friends = (props) => {
     const [friendsList, setFriendsList] = useState([]);
@@ -21,16 +22,24 @@ const Friends = (props) => {
         .catch(err => console.log(err.response));
     };
 
+    const deleteFriend = id => {
+        // console.log(id);
+        axiosWithAuth().delete(`http://localhost:5000/api/friends/${id}`)
+            .then(res => setFriendsList(res.data))
+            .catch(err => console.log(err.response));
+    };
+
     return (
         <div>
             <h2>Friends</h2>
             <Form submitFriend={addFriend}/>
             {friendsList.map(friend => {
-                return <div key={friend.id}>{friend.name}</div>;
+                return <Card key={friend.id}
+                             friend={friend}
+                             deleteFriend={deleteFriend}/>;
             })}
-            
         </div>
-    )
+    );
 };
 
 export default Friends;
