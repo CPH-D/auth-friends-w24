@@ -1,17 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+// import axios from 'axios';
+import axiosWithAuth from '../utilities/Authorization';
 
 const Friends = (props) => {
     const [friendsList, setFriendsList] = useState([]);
     
     useEffect(() => {
-        axios.get('http://localhost:5000/api/friends', {
-            headers: {
-                Authorization: localStorage.getItem('token')
-            }
-        })
+        axiosWithAuth().get('http://localhost:5000/api/friends')
         .then(res => {
-            console.log(res);
+            // console.log(res);
+            setFriendsList(res.data);
         })
         .catch(err => console.log(err.response));
     }, []);
@@ -19,6 +17,9 @@ const Friends = (props) => {
     return (
         <div>
             <h2>Friends</h2>
+            {friendsList.map(friend => {
+                return <div key={friend.id}>{friend.name}</div>;
+            })}
         </div>
     )
 };
