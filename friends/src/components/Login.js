@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 const Login = (props) => {
-    const [creds, setCreds] = useState({});
+    const [creds, setCreds] = useState({ username: "", password: ""});
     const handleChange = event => {
         setCreds({...creds, [event.target.name]: event.target.value})
     }
@@ -9,13 +9,13 @@ const Login = (props) => {
         <form>
             <input type="text" 
                    name="username"
-                   placeholder="username" 
+                   placeholder="Enter your username..." 
                    onChange={handleChange}
                    value={creds.username}
                    />
-            <input type="pass"
+            <input type="password"
                    name="password" 
-                   placeholder="password"
+                   placeholder="Enter your password..."
                    onChange={handleChange}
                    value={creds.password}
                    />
